@@ -1,0 +1,70 @@
+{
+  "name": "express-zod-openapi",
+  "version": "0.0.0",
+  "description": "Express Zod OpenAPI",
+  "keywords": [
+    "express",
+    "zod",
+    "oas",
+    "openapi",
+    "swagger"
+  ],
+  "homepage": "https://github.com/MunifTanjim/express-zod-openapi#readme",
+  "bugs": {
+    "url": "https://github.com/MunifTanjim/express-zod-openapi/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Munif Tanjim",
+    "url": "https://muniftanjim.dev"
+  },
+  "files": [
+    "lib",
+    "yarn.lock"
+  ],
+  "source": "src/index.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.module.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MunifTanjim/express-zod-openapi"
+  },
+  "scripts": {
+    "prebuild": "rimraf lib/*",
+    "build": "microbundle --format cjs,es --target node",
+    "changelog": "conventional-changelog --config .changelogrc.js -i CHANGELOG.md -s -a",
+    "postchangelog": "git add CHANGELOG.md",
+    "cz": "git-cz",
+    "dev": "microbundle watch --format cjs,es --target node",
+    "prepack": "yarn run build",
+    "release": "./scripts/release.sh",
+    "test": "jest",
+    "version": "yarn run changelog"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
+    "@commitlint/prompt-cli": "^9.1.1",
+    "@types/jest": "^26.0.5",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
+    "commitizen": "^4.1.2",
+    "conventional-changelog-cli": "^2.0.34",
+    "conventional-changelog-conventionalcommits": "^4.3.0",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "lint-staged": "^10.2.11",
+    "microbundle": "^0.12.3",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.1.3",
+    "typescript": "^3.9.7"
+  },
+  "peerDependencies": {}
+}

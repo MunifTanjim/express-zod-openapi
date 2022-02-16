@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ci:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Setup Dependencies
+        run: yarn --frozen-lockfile
+      - name: Build Package
+        run: yarn run build
+      - name: Run Tests
+        run: yarn run test --ci --coverage
+      # - name: Upload Coverage to Codecov
+      #   uses: codecov/codecov-action@v1
+      #   with:
+      #     fail_ci_if_error: true

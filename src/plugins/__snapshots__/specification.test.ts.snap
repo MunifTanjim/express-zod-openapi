@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getJoiRequestValidatorPlugin request validation options: segmentOrder (custom) validates body before query 1`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_enum_value\\",
+    \\"options\\": [
+      \\"plastic\\",
+      \\"rubber\\",
+      \\"wood\\"
+    ],
+    \\"path\\": [
+      \\"type\\"
+    ],
+    \\"message\\": \\"Invalid enum value. Expected 'plastic' | 'rubber' | 'wood', received 'paper'\\"
+  }
+]",
+    "segment": "body",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin request validation options: segmentOrder (custom) validates body before query 2`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_type\\",
+    \\"expected\\": \\"number\\",
+    \\"received\\": \\"undefined\\",
+    \\"path\\": [
+      \\"count\\"
+    ],
+    \\"message\\": \\"Required\\"
+  }
+]",
+    "segment": "query",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin request validation options: segmentOrder (default) validates query before body 1`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_type\\",
+    \\"expected\\": \\"number\\",
+    \\"received\\": \\"undefined\\",
+    \\"path\\": [
+      \\"count\\"
+    ],
+    \\"message\\": \\"Required\\"
+  }
+]",
+    "segment": "query",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin request validation options: segmentOrder (default) validates query before body 2`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_enum_value\\",
+    \\"options\\": [
+      \\"plastic\\",
+      \\"rubber\\",
+      \\"wood\\"
+    ],
+    \\"path\\": [
+      \\"type\\"
+    ],
+    \\"message\\": \\"Invalid enum value. Expected 'plastic' | 'rubber' | 'wood', received 'paper'\\"
+  }
+]",
+    "segment": "body",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin request validation segment validation validates body 1`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_enum_value\\",
+    \\"options\\": [
+      \\"plastic\\",
+      \\"rubber\\",
+      \\"wood\\"
+    ],
+    \\"path\\": [
+      \\"type\\"
+    ],
+    \\"message\\": \\"Invalid enum value. Expected 'plastic' | 'rubber' | 'wood', received 'paper'\\"
+  }
+]",
+    "segment": "body",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin request validation segment validation validates headers 1`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"validation\\": \\"regex\\",
+    \\"code\\": \\"invalid_string\\",
+    \\"message\\": \\"Invalid\\",
+    \\"path\\": [
+      \\"authorization\\"
+    ]
+  }
+]",
+    "segment": "headers",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin request validation segment validation validates params 1`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_type\\",
+    \\"expected\\": \\"number\\",
+    \\"received\\": \\"string\\",
+    \\"path\\": [
+      \\"id\\"
+    ],
+    \\"message\\": \\"Expected number, received string\\"
+  }
+]",
+    "segment": "params",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin request validation segment validation validates query 1`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_type\\",
+    \\"expected\\": \\"number\\",
+    \\"received\\": \\"undefined\\",
+    \\"path\\": [
+      \\"count\\"
+    ],
+    \\"message\\": \\"Required\\"
+  }
+]",
+    "segment": "query",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin request validation segment validation validates query 2`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_type\\",
+    \\"expected\\": \\"number\\",
+    \\"received\\": \\"string\\",
+    \\"path\\": [
+      \\"count\\"
+    ],
+    \\"message\\": \\"Expected number, received string\\"
+  }
+]",
+    "segment": "query",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin response validation segment validation validates body 1`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_type\\",
+    \\"expected\\": \\"number\\",
+    \\"received\\": \\"string\\",
+    \\"path\\": [
+      \\"pong\\"
+    ],
+    \\"message\\": \\"Expected number, received string\\"
+  }
+]",
+    "segment": "body",
+  },
+}
+`;
+
+exports[`getJoiRequestValidatorPlugin response validation segment validation validates headers 1`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_type\\",
+    \\"expected\\": \\"number\\",
+    \\"received\\": \\"undefined\\",
+    \\"path\\": [
+      \\"x-count\\"
+    ],
+    \\"message\\": \\"Required\\"
+  }
+]",
+    "segment": "headers",
+  },
+}
+`;

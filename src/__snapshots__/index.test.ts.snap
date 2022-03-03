@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExpressOpenAPI basic request schema generation 1`] = `
+Object {
+  "/ping": Object {
+    "post": Object {
+      "operationId": "ping",
+      "parameters": Array [
+        Object {
+          "in": "query",
+          "name": "count",
+          "required": true,
+          "schema": Object {
+            "description": "number of times ping will pong",
+            "type": "integer",
+          },
+        },
+      ],
+      "requestBody": Object {
+        "content": Object {
+          "application/json": Object {
+            "schema": Object {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "additionalProperties": false,
+              "properties": Object {
+                "type": Object {
+                  "default": "rubber",
+                  "enum": Array [
+                    "plastic",
+                    "rubber",
+                    "wood",
+                  ],
+                  "type": "string",
+                },
+              },
+              "type": "object",
+            },
+          },
+        },
+      },
+      "responses": Object {
+        "default": Object {
+          "description": "",
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`ExpressOpenAPI basic response schema generation 1`] = `
+Object {
+  "/ping": Object {
+    "post": Object {
+      "responses": Object {
+        "200": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "additionalProperties": false,
+                "properties": Object {
+                  "pong": Object {
+                    "type": "integer",
+                  },
+                },
+                "required": Array [
+                  "pong",
+                ],
+                "type": "object",
+              },
+            },
+          },
+          "description": "",
+          "headers": Object {
+            "x-count": Object {
+              "required": true,
+              "schema": Object {
+                "type": "integer",
+              },
+            },
+          },
+        },
+        "default": Object {
+          "description": "",
+        },
+      },
+    },
+  },
+}
+`;

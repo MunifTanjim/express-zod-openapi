@@ -339,7 +339,7 @@ export const getSpecificationPlugin = ({
             requestBody
           )
 
-          return
+          continue
         }
 
         const location = parameterLocationBySegment[segment]

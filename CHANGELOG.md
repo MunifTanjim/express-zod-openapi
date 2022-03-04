@@ -5,3 +5,10 @@
 
 * initial implementation ([742a89c](https://github.com/MunifTanjim/express-zod-openapi/commit/742a89ced528c842c038c67b734e8cebb4db3248))
 
+### [0.0.2](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.1...0.0.2) (2022-03-04)
+
+
+### Bug Fixes
+
+* zodToJsonSchema export ([48c03a4](https://github.com/MunifTanjim/express-zod-openapi/commit/48c03a414cca885fb78ed2dbb9f42c5c6774cfea))
+

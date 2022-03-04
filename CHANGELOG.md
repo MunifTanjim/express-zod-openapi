@@ -20,3 +20,10 @@
 * double next call on request validation error ([f8e6814](https://github.com/MunifTanjim/express-zod-openapi/commit/f8e68142cd8f22fd23b6ff08a75dc8a93e8b9216))
 * response validation nested call stack ([d6a1e55](https://github.com/MunifTanjim/express-zod-openapi/commit/d6a1e55f82251f79f0465f333043fb0ef8f75d5a))
 
+### [0.0.4](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.3...0.0.4) (2022-03-04)
+
+
+### Bug Fixes
+
+* specification generation unexpected return ([cf612ad](https://github.com/MunifTanjim/express-zod-openapi/commit/cf612ade726dd592941ce18e472be4ae4e2f3fc6))
+

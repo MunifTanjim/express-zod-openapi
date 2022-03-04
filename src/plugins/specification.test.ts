@@ -476,6 +476,43 @@ describe('getJoiRequestValidatorPlugin', () => {
 
         expect(responsePass.status).toBe(200)
       })
+
+      test('works for res.send inside callback', async () => {
+        app.post(
+          '/ping',
+          spec({
+            operationId: 'ping',
+            res: {
+              200: {
+                body: z.object({
+                  pong: z.number().int(),
+                }),
+              },
+              default: {},
+            },
+          }),
+          (req, res) => {
+            const pass = Number(req.query.pass)
+
+            setTimeout(() => {
+              res.status(200).json({
+                pong: pass ? 42 : 'forty-two',
+              })
+            }, 0)
+          }
+        )
+
+        app.use(errorHandler)
+
+        const responseFail = await request(app).post('/ping?pass=0')
+
+        expect(responseFail.status).toBe(500)
+        expect(responseFail.body).toMatchSnapshot()
+
+        const responsePass = await request(app).post('/ping?pass=1')
+
+        expect(responsePass.status).toBe(200)
+      })
     })
 
     describe('options: res.skipValidation', () => {

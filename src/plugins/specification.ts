@@ -165,11 +165,14 @@ async function validateRequest(
 function setupResponseValidation(
   res: ExpressResponse,
   specInfo: SpecInfo,
-  segmentOrder: ResponseSegment[]
+  segmentOrder: ResponseSegment[],
+  next: (err?: unknown) => void
 ) {
   const originalSend = res.send
 
   res.send = function validateAndSendResponse(...args) {
+    res.send = originalSend
+
     const body = args[0]
 
     const isJsonContent = /application\/json/.test(
@@ -186,9 +189,10 @@ function setupResponseValidation(
       : specInfo.res.get('default')
 
     if (!schemaBySegment) {
-      throw new Error(
-        `Validation Schema not found for Response(${res.statusCode})`
+      next(
+        new Error(`Validation Schema not found for Response(${res.statusCode})`)
       )
+      return res
     }
 
     for (const segment of segmentOrder) {
@@ -201,7 +205,8 @@ function setupResponseValidation(
       const result = schema.safeParse(value[segment])
 
       if (!result.success) {
-        throw new ResponseValidationError(result.error, segment)
+        next(new ResponseValidationError(result.error, segment))
+        return res
       }
 
       if (segment === 'body') {
@@ -284,7 +289,7 @@ export const getSpecificationPlugin = ({
         next
       ): Promise<void> => {
         if (!skipResponseValidation && validationSchema.res) {
-          setupResponseValidation(res, specInfo, resSegmentOrder)
+          setupResponseValidation(res, specInfo, resSegmentOrder, next)
         }
 
         if (!skipRequestValidation && validationSchema.req) {

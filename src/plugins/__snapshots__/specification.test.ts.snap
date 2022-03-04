@@ -216,3 +216,22 @@ Object {
   },
 }
 `;
+
+exports[`getJoiRequestValidatorPlugin response validation segment validation works for res.send inside callback 1`] = `
+Object {
+  "error": Object {
+    "message": "[
+  {
+    \\"code\\": \\"invalid_type\\",
+    \\"expected\\": \\"number\\",
+    \\"received\\": \\"string\\",
+    \\"path\\": [
+      \\"pong\\"
+    ],
+    \\"message\\": \\"Expected number, received string\\"
+  }
+]",
+    "segment": "body",
+  },
+}
+`;

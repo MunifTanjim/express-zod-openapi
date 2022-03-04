@@ -1,2 +1,2 @@
 export * from 'zod'
-export * from 'zod-to-json-schema'
+export { zodToJsonSchema } from 'zod-to-json-schema'

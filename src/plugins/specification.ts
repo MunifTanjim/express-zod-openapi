@@ -292,6 +292,7 @@ export const getSpecificationPlugin = ({
             await validateRequest(req, specInfo, reqSegmentOrder)
           } catch (err) {
             next(err)
+            return
           }
         }
 

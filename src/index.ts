@@ -1,4 +1,4 @@
-import { Application, Handler, Router, Request } from 'express'
+import { Application, Handler, Router } from 'express'
 import { OpenAPISpecification, processExpressRouters } from './openapi'
 import {
   ExpressOpenAPIPlugin,

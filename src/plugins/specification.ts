@@ -250,7 +250,7 @@ export const getSpecificationPlugin = ({
     skipValidation: skipResponseValidation = false,
   } = resConfig
 
-  const joiRequestValidatorPlugin: SpecificationPlugin = {
+  const specificationPlugin: SpecificationPlugin = {
     name: 'zod-openapi-spec',
 
     getMiddleware: (internals, validationSchema): Handler => {
@@ -447,5 +447,5 @@ export const getSpecificationPlugin = ({
     },
   }
 
-  return joiRequestValidatorPlugin
+  return specificationPlugin
 }

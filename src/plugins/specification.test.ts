@@ -16,7 +16,7 @@ const preprocessors = {
   },
 }
 
-describe('getJoiRequestValidatorPlugin', () => {
+describe('getSpecificationPlugin', () => {
   test('returns plugin', () => {
     const plugin = getSpecificationPlugin()
     expect(plugin.name).toMatchInlineSnapshot(`"zod-openapi-spec"`)
@@ -522,7 +522,7 @@ describe('getJoiRequestValidatorPlugin', () => {
         app = express()
         app.use(express.json())
 
-        const joiResponseValidatorPlugin = getSpecificationPlugin({
+        const specificationPlugin = getSpecificationPlugin({
           req: {
             skipValidation: true,
           },
@@ -531,7 +531,7 @@ describe('getJoiRequestValidatorPlugin', () => {
           },
         })
 
-        spec = expressOpenApi.registerPlugin(joiResponseValidatorPlugin)
+        spec = expressOpenApi.registerPlugin(specificationPlugin)
 
         app.post(
           '/ping',

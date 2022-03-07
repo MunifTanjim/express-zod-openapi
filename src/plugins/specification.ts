@@ -27,7 +27,7 @@ export type RequestSegment =
 export type ResponseSegment = 'body' | 'headers'
 
 type SpecInfo = {
-  operationId: string
+  operationId?: string
   req: Map<RequestSegment, Schema<any> | undefined>
   res: Map<
     string,
@@ -39,7 +39,7 @@ type SpecInfo = {
 }
 
 type SpecificationSchema = {
-  operationId: string
+  operationId?: string
   req?: {
     [segment in RequestSegment]?: Schema<any>
   }
@@ -315,10 +315,12 @@ export const getSpecificationPlugin = ({
           continue
         }
 
-        specification.setPathItemOperation(path, method, {
-          ...specification.getPathItemOperation(path, method)!,
-          operationId: specInfo.operationId,
-        })
+        if (specInfo.operationId) {
+          specification.setPathItemOperation(path, method, {
+            ...specification.getPathItemOperation(path, method)!,
+            operationId: specInfo.operationId,
+          })
+        }
 
         if (segment === 'body') {
           const result = zodToJsonSchema(schema)

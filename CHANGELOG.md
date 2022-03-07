@@ -27,3 +27,10 @@
 
 * specification generation unexpected return ([cf612ad](https://github.com/MunifTanjim/express-zod-openapi/commit/cf612ade726dd592941ce18e472be4ae4e2f3fc6))
 
+### [0.0.5](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.4...0.0.5) (2022-03-07)
+
+
+### Features
+
+* make operationId optional ([e87d564](https://github.com/MunifTanjim/express-zod-openapi/commit/e87d564d09d1be31359148884f31735aab53cf0d))
+

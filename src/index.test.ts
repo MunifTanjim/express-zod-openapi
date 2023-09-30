@@ -19,7 +19,7 @@ describe('ExpressOpenAPI', () => {
 
     test('can create instance with arguments', () => {
       expect(new ExpressOpenAPI({ useStringStashKey: true })).toBeInstanceOf(
-        ExpressOpenAPI
+        ExpressOpenAPI,
       )
     })
   })
@@ -28,7 +28,7 @@ describe('ExpressOpenAPI', () => {
     const expressOpenApi = new ExpressOpenAPI()
 
     const getSpecificationMiddleware = expressOpenApi.registerPlugin(
-      getSpecificationPlugin()
+      getSpecificationPlugin(),
     )
 
     const app = express()
@@ -44,14 +44,14 @@ describe('ExpressOpenAPI', () => {
               z
                 .number({ description: 'asd' })
                 .int()
-                .describe('number of times ping will pong')
+                .describe('number of times ping will pong'),
             ),
           }),
           body: z.object({
             type: z.enum(['plastic', 'rubber', 'wood']).default('rubber'),
           }),
         },
-      })
+      }),
     )
 
     const specification = expressOpenApi.populateSpecification(app)
@@ -63,7 +63,7 @@ describe('ExpressOpenAPI', () => {
     const expressOpenApi = new ExpressOpenAPI()
 
     const getSpecificationMiddleware = expressOpenApi.registerPlugin(
-      getSpecificationPlugin()
+      getSpecificationPlugin(),
     )
 
     const app = express()
@@ -77,7 +77,7 @@ describe('ExpressOpenAPI', () => {
             headers: z.object({
               'x-count': z.preprocess(
                 preprocessors.numberString,
-                z.number().int()
+                z.number().int(),
               ),
             }),
             body: z.object({
@@ -89,7 +89,7 @@ describe('ExpressOpenAPI', () => {
       (_req, res) => {
         res.set('x-count', '42')
         res.status(200).json({ pong: 42 })
-      }
+      },
     )
 
     const specification = expressOpenApi.populateSpecification(app)

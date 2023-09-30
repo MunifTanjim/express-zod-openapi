@@ -2,7 +2,7 @@ import { Handler } from 'express'
 import { Route } from './openapi/types'
 import { HttpMethod } from './types'
 
-export class Stash<Value extends any> {
+export class Stash<Value> {
   private stashKey: string | symbol
 
   constructor(stashKey: string | symbol) {
@@ -14,7 +14,7 @@ export class Stash<Value extends any> {
       if (layer.method === method) {
         const descriptor = Object.getOwnPropertyDescriptor(
           layer.handle,
-          this.stashKey
+          this.stashKey,
         )
         if (descriptor) {
           return descriptor.value

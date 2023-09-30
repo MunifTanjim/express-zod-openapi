@@ -23,7 +23,7 @@ describe('openapi/specification', () => {
         paths: {},
       })
     }).toThrowErrorMatchingInlineSnapshot(
-      `"Invalid OpenAPI version: 2.0.0, expected format: 3.y.z"`
+      `"Invalid OpenAPI version: 2.0.0, expected format: 3.y.z"`,
     )
   })
 
@@ -112,7 +112,7 @@ describe('openapi/specification', () => {
     test('toString', () => {
       const spec = new OpenAPISpecification()
       expect(spec.toString(null, 2)).toBe(
-        JSON.stringify(spec.toJSON(), null, 2)
+        JSON.stringify(spec.toJSON(), null, 2),
       )
     })
   })

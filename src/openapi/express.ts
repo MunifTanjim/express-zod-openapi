@@ -12,7 +12,7 @@ const regexPattern = {
 
 const getPathString = (
   pathRegex: RegExp,
-  keys: Layer['keys']
+  keys: Layer['keys'],
 ): string | null => {
   const pathRegexpSource = pathRegex.source
 
@@ -42,7 +42,7 @@ const processRoute = (
   spec: OpenAPISpecification,
   route: Route,
   basePath = '',
-  plugins: RegisteredExpressOpenAPIPlugin[]
+  plugins: RegisteredExpressOpenAPIPlugin[],
 ): void => {
   const routePaths = Array.isArray(route.path) ? route.path : [route.path]
 
@@ -52,7 +52,7 @@ const processRoute = (
     }`.replace(/:([a-zA-Z0-9_]+)/g, '{$1}')
 
     const methods = Object.keys(route.methods).filter(
-      (method): method is HttpMethod => method !== '_all'
+      (method): method is HttpMethod => method !== '_all',
     )
 
     if (!spec.paths[path]) {
@@ -85,7 +85,7 @@ export const processExpressRouters = (
   spec: OpenAPISpecification,
   app: Application | Router,
   basePath = '',
-  plugins: RegisteredExpressOpenAPIPlugin[]
+  plugins: RegisteredExpressOpenAPIPlugin[],
 ): void => {
   const stack: StackLayer[] = app.stack ?? (app as Application)._router?.stack
 
@@ -119,7 +119,7 @@ export const processExpressRouters = (
           spec,
           layer.handle as Router,
           basePath + '/' + parsedPath,
-          plugins
+          plugins,
         )
       }
 
@@ -137,7 +137,7 @@ export const processExpressRouters = (
         spec,
         layer.handle as Router,
         basePath + '/' + regexPath,
-        plugins
+        plugins,
       )
 
       continue

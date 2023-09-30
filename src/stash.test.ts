@@ -24,8 +24,8 @@ describe('Stash', () => {
           stack: [{ handle: handler, method: 'get' } as any],
           methods: { get: true },
         },
-        'get'
-      )
+        'get',
+      ),
     ).toBe('pong')
 
     expect(
@@ -35,8 +35,8 @@ describe('Stash', () => {
           stack: [{ handle: handler, method: 'get' } as any],
           methods: { get: true },
         },
-        'post'
-      )
+        'post',
+      ),
     ).toBe(null)
   })
 
@@ -62,8 +62,8 @@ describe('Stash', () => {
           stack: [{ handle: handler, method: 'get' } as any],
           methods: { get: true },
         },
-        'get'
-      )
+        'get',
+      ),
     ).toBe('pong')
   })
 })

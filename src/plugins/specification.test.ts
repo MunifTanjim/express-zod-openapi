@@ -83,7 +83,7 @@ describe('getSpecificationPlugin', () => {
               }),
             },
           }),
-          handler
+          handler,
         )
 
         app.use(errorHandler)
@@ -111,7 +111,7 @@ describe('getSpecificationPlugin', () => {
               }),
             },
           }),
-          handler
+          handler,
         )
 
         app.use(errorHandler)
@@ -133,12 +133,12 @@ describe('getSpecificationPlugin', () => {
               query: z.object({
                 count: z.preprocess(
                   preprocessors.numberString,
-                  z.number().int()
+                  z.number().int(),
                 ),
               }),
             },
           }),
-          handler
+          handler,
         )
 
         app.use(errorHandler)
@@ -148,7 +148,7 @@ describe('getSpecificationPlugin', () => {
         expect(invalidResponse1.body).toMatchSnapshot()
 
         const invalidResponse2 = await request(app).post(
-          '/ping?count=forty-two'
+          '/ping?count=forty-two',
         )
         expect(invalidResponse2.status).toBe(400)
         expect(invalidResponse2.body).toMatchSnapshot()
@@ -168,7 +168,7 @@ describe('getSpecificationPlugin', () => {
               }),
             },
           }),
-          handler
+          handler,
         )
 
         app.use(errorHandler)
@@ -218,7 +218,7 @@ describe('getSpecificationPlugin', () => {
               body: z.object({
                 count: z.preprocess(
                   preprocessors.numberString,
-                  z.number().int()
+                  z.number().int(),
                 ),
               }),
             },
@@ -227,7 +227,7 @@ describe('getSpecificationPlugin', () => {
             mockFn(req.body)
             next()
           },
-          handler
+          handler,
         )
 
         app.use(errorHandler)
@@ -272,12 +272,12 @@ describe('getSpecificationPlugin', () => {
               query: z.object({
                 count: z.preprocess(
                   preprocessors.numberString,
-                  z.number().int()
+                  z.number().int(),
                 ),
               }),
             },
           }),
-          handler
+          handler,
         )
 
         app.use(errorHandler)
@@ -328,12 +328,12 @@ describe('getSpecificationPlugin', () => {
               query: z.object({
                 count: z.preprocess(
                   preprocessors.numberString,
-                  z.number().int()
+                  z.number().int(),
                 ),
               }),
             },
           }),
-          handler
+          handler,
         )
 
         app.use(errorHandler)
@@ -410,7 +410,7 @@ describe('getSpecificationPlugin', () => {
                 headers: z.object({
                   'x-count': z.preprocess(
                     preprocessors.numberString,
-                    z.number().int()
+                    z.number().int(),
                   ),
                 }),
               },
@@ -427,7 +427,7 @@ describe('getSpecificationPlugin', () => {
             res.status(200).json({
               pong: 42,
             })
-          }
+          },
         )
 
         app.use(errorHandler)
@@ -462,7 +462,7 @@ describe('getSpecificationPlugin', () => {
             res.status(200).json({
               pong: pass ? 42 : 'forty-two',
             })
-          }
+          },
         )
 
         app.use(errorHandler)
@@ -499,7 +499,7 @@ describe('getSpecificationPlugin', () => {
                 pong: pass ? 42 : 'forty-two',
               })
             }, 0)
-          }
+          },
         )
 
         app.use(errorHandler)
@@ -556,7 +556,7 @@ describe('getSpecificationPlugin', () => {
             res.status(200).json({
               pong: 42,
             })
-          }
+          },
         )
 
         app.use(errorHandler)

@@ -3,27 +3,25 @@ import { OpenAPISpecification } from '../openapi'
 import { Stash } from '../stash'
 import { HttpMethod } from '../types'
 
-export type ExpressOpenAPIPluginInternals<StashValue extends any> = {
+export type ExpressOpenAPIPluginInternals<StashValue> = {
   specification: OpenAPISpecification
   stash: Stash<StashValue>
 }
 
-export type RouteProcessor<StashValue extends any> = (
+export type RouteProcessor<StashValue> = (
   specification: OpenAPISpecification,
   stash: StashValue,
   info: {
     path: string
     method: HttpMethod
-  }
+  },
 ) => void
 
 export interface ExpressOpenAPIPlugin<
-  StashValue extends unknown = unknown,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  StashValue = unknown,
   GetMiddleware extends (...params: any[]) => Handler = (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...params: any[]
-  ) => Handler
+  ) => Handler,
 > {
   name: string
   getMiddleware: (

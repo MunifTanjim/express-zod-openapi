@@ -68,7 +68,7 @@ app.post(
     res.status(200).json({
       pong: count,
     })
-  }
+  },
 )
 
 app.use((err, _req, res, next) => {

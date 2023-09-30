@@ -55,7 +55,7 @@ type UnionTypeOf<T extends Schema<any>> = T extends unknown ? TypeOf<T> : never
 type ResponseSegmentType<
   VS extends SpecificationSchema,
   S extends ResponseSegment,
-  D = unknown
+  D = unknown,
 > = VS['res'] extends undefined
   ? D
   : NonNullable<VS['res']>[keyof NonNullable<VS['res']>][S] extends undefined
@@ -67,7 +67,7 @@ type ResponseSegmentType<
 type RequestSegmentType<
   VS extends SpecificationSchema,
   S extends RequestSegment,
-  D = unknown
+  D = unknown,
 > = VS['req'] extends undefined
   ? D
   : NonNullable<VS['req']>[S] extends undefined
@@ -94,7 +94,7 @@ export type RequestHandler<S extends SpecificationSchema> =
   >
 
 export type GetSpecificationMiddleware = (
-  schema: SpecificationSchema
+  schema: SpecificationSchema,
 ) => Handler
 
 type SpecificationPlugin = ExpressOpenAPIPlugin<
@@ -139,7 +139,7 @@ const parameterLocationBySegment: {
 async function validateRequest(
   req: ExpressRequest,
   specInfo: SpecInfo,
-  segmentOrder: RequestSegment[]
+  segmentOrder: RequestSegment[],
 ) {
   await segmentOrder.reduce((promise, segment) => {
     return promise.then(async () => {
@@ -166,7 +166,7 @@ function setupResponseValidation(
   res: ExpressResponse,
   specInfo: SpecInfo,
   segmentOrder: ResponseSegment[],
-  next: (err?: unknown) => void
+  next: (err?: unknown) => void,
 ) {
   const originalSend = res.send
 
@@ -176,7 +176,7 @@ function setupResponseValidation(
     const body = args[0]
 
     const isJsonContent = /application\/json/.test(
-      String(res.get('content-type'))
+      String(res.get('content-type')),
     )
 
     const value: { [key in ResponseSegment]: unknown } = {
@@ -190,7 +190,9 @@ function setupResponseValidation(
 
     if (!schemaBySegment) {
       next(
-        new Error(`Validation Schema not found for Response(${res.statusCode})`)
+        new Error(
+          `Validation Schema not found for Response(${res.statusCode})`,
+        ),
       )
       return res
     }
@@ -268,7 +270,7 @@ export const getSpecificationPlugin = ({
       }
 
       for (const [code, schemaBySegment] of Object.entries(
-        validationSchema.res ?? {}
+        validationSchema.res ?? {},
       )) {
         specInfo.res.set(
           code,
@@ -279,14 +281,14 @@ export const getSpecificationPlugin = ({
               bySegment[segment as ResponseSegment] = schema
             }
             return bySegment
-          }, {})
+          }, {}),
         )
       }
 
       const validationMiddleware: Handler = async (
         req,
         res,
-        next
+        next,
       ): Promise<void> => {
         if (!skipResponseValidation && validationSchema.res) {
           setupResponseValidation(res, specInfo, resSegmentOrder, next)
@@ -328,8 +330,7 @@ export const getSpecificationPlugin = ({
           const requestBody: RequestBodyObject = {
             content: {
               'application/json': {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
+                // @ts-expect-error ...
                 schema: result,
               },
             },
@@ -338,7 +339,7 @@ export const getSpecificationPlugin = ({
           specification.setPathItemOperationRequestBody(
             path,
             method,
-            requestBody
+            requestBody,
           )
 
           continue
@@ -356,8 +357,7 @@ export const getSpecificationPlugin = ({
               const parameterObject: ParameterObject = {
                 name,
                 in: location,
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-expect-error
+                // @ts-expect-error ...
                 schema: schema,
                 required: required.includes(name),
               }
@@ -365,7 +365,7 @@ export const getSpecificationPlugin = ({
               specification.addPathItemOperationParameter(
                 path,
                 method,
-                parameterObject
+                parameterObject,
               )
             }
           }
@@ -386,13 +386,12 @@ export const getSpecificationPlugin = ({
             ...specification.getPathItemOperationResponse(
               path,
               method,
-              httpStatusCode
+              httpStatusCode,
             ),
             description: '',
             content: {
               'application/json': {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
+                // @ts-expect-error ...
                 schema: result,
               },
             },
@@ -402,7 +401,7 @@ export const getSpecificationPlugin = ({
             path,
             method,
             httpStatusCode,
-            responseObject
+            responseObject,
           )
         }
 
@@ -417,8 +416,7 @@ export const getSpecificationPlugin = ({
             if (properties) {
               for (const [name, schema] of Object.entries(properties)) {
                 const headerObject: HeaderObject = {
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
+                  // @ts-expect-error ...
                   schema: schema,
                   required: required.includes(name),
                 }
@@ -431,7 +429,7 @@ export const getSpecificationPlugin = ({
               ...specification.getPathItemOperationResponse(
                 path,
                 method,
-                httpStatusCode
+                httpStatusCode,
               ),
               description: '',
               headers: headersObject,
@@ -441,7 +439,7 @@ export const getSpecificationPlugin = ({
               path,
               method,
               httpStatusCode,
-              responseObject
+              responseObject,
             )
           }
         }

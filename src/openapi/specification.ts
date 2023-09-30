@@ -90,7 +90,7 @@ export class OpenAPISpecification {
       openapi: '3.0.0',
       info: { title: '', version: '' },
       paths: {},
-    }
+    },
   ) {
     this.spec = {
       openapi,
@@ -124,7 +124,7 @@ export class OpenAPISpecification {
   setOpenApiVersion(version: string): this {
     if (!OpenAPISpecification.isValidOpenApiVersion(version)) {
       throw new Error(
-        `Invalid OpenAPI version: ${version}, expected format: 3.y.z`
+        `Invalid OpenAPI version: ${version}, expected format: 3.y.z`,
       )
     }
 
@@ -149,7 +149,7 @@ export class OpenAPISpecification {
   setComponent<Type extends ComponentType>(
     componentType: Type,
     name: string,
-    component: ComponentObject<Type>
+    component: ComponentObject<Type>,
   ): this {
     this.spec.components[componentType] = {
       ...this.spec.components[componentType],
@@ -173,7 +173,7 @@ export class OpenAPISpecification {
 
   addPathItemParameter(
     path: string,
-    parameter: ParameterObject | ReferenceObject
+    parameter: ParameterObject | ReferenceObject,
   ): this {
     const pathItem = this.getPathItem(path)
 
@@ -208,7 +208,7 @@ export class OpenAPISpecification {
 
   getPathItemOperation(
     path: string,
-    method: HttpMethod
+    method: HttpMethod,
   ): OperationObject | null {
     return this.paths[path]?.[method] ?? null
   }
@@ -216,7 +216,7 @@ export class OpenAPISpecification {
   setPathItemOperation(
     path: string,
     method: HttpMethod,
-    operation: OperationObject
+    operation: OperationObject,
   ): this {
     const pathItem = this.getPathItem(path)
 
@@ -233,7 +233,7 @@ export class OpenAPISpecification {
   setPathItemOperationRequestBody(
     path: string,
     method: HttpMethod,
-    requestBody: RequestBodyObject | ReferenceObject
+    requestBody: RequestBodyObject | ReferenceObject,
   ): this {
     const operation = this.getPathItemOperation(path, method)
 
@@ -247,7 +247,7 @@ export class OpenAPISpecification {
   getPathItemOperationResponse(
     path: string,
     method: HttpMethod,
-    httpStatusCode: number | 'default'
+    httpStatusCode: number | 'default',
   ): ResponseObject | ReferenceObject | null {
     return this.paths[path]?.[method]?.responses?.[httpStatusCode] ?? null
   }
@@ -256,7 +256,7 @@ export class OpenAPISpecification {
     path: string,
     method: HttpMethod,
     httpStatusCode: number | 'default',
-    response: ResponseObject | ReferenceObject
+    response: ResponseObject | ReferenceObject,
   ): this {
     const operation = this.getPathItemOperation(path, method)
 
@@ -282,7 +282,7 @@ export class OpenAPISpecification {
   addPathItemOperationParameter(
     path: string,
     method: HttpMethod,
-    parameter: ParameterObject | ReferenceObject
+    parameter: ParameterObject | ReferenceObject,
   ): this {
     const operation = this.getPathItemOperation(path, method)
 
@@ -300,7 +300,7 @@ export class OpenAPISpecification {
   addPathItemOperationSecurityRequirement(
     path: string,
     method: HttpMethod,
-    securityRequirement: SecurityRequirementObject
+    securityRequirement: SecurityRequirementObject,
   ): this {
     const operation = this.getPathItemOperation(path, method)
 
@@ -318,7 +318,7 @@ export class OpenAPISpecification {
   addPathItemOperationServer(
     path: string,
     method: HttpMethod,
-    server: ServerObject
+    server: ServerObject,
   ): this {
     const operation = this.getPathItemOperation(path, method)
 
@@ -365,7 +365,7 @@ export class OpenAPISpecification {
   }
 
   setExternalDocs(
-    externalDocs: ExternalDocumentationObject
+    externalDocs: ExternalDocumentationObject,
   ): OpenAPISpecification {
     this.spec.externalDocs = externalDocs
     return this
@@ -377,7 +377,7 @@ export class OpenAPISpecification {
 
   toString(
     replacer?: Parameters<JSON['stringify']>[1],
-    space?: Parameters<JSON['stringify']>[2]
+    space?: Parameters<JSON['stringify']>[2],
   ): string {
     return JSON.stringify(this.spec, replacer, space)
   }

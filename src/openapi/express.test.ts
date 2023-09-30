@@ -8,14 +8,14 @@ import { Stash } from '../stash'
 describe('processExpressRouters', () => {
   describe('detects paths with methods', () => {
     const getPathMethods = (
-      specification: OpenAPIObject
+      specification: OpenAPIObject,
     ): Record<string, string[]> => {
       return Object.keys(specification.paths).reduce<Record<string, string[]>>(
         (result, path) => {
           result[path] = Object.keys(specification.paths[path])
           return result
         },
-        {}
+        {},
       )
     }
 
@@ -200,13 +200,13 @@ describe('processExpressRouters', () => {
       1,
       specification,
       'forty-two',
-      { method: 'post', path: '/' }
+      { method: 'post', path: '/' },
     )
     expect(registeredPlugin.processRoute).toHaveBeenNthCalledWith(
       2,
       specification,
       'forty-two',
-      { method: 'get', path: '/{id}' }
+      { method: 'get', path: '/{id}' },
     )
   })
 })

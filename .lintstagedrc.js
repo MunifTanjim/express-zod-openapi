@@ -1,4 +1,4 @@
 module.exports = {
-  '*.{ts}': () => 'tsc -p tsconfig.json --noEmit',
-  '*.{ts}': ['eslint'],
+  '*.{js,ts}': ['prettier --write', 'eslint'],
+  '*.{json,md}': 'prettier --write',
 }

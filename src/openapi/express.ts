@@ -10,7 +10,10 @@ const regexPattern = {
   rootPath: /^\^\\\/\?\(\?=\\\/\|\$\)$/,
 }
 
-const getPathString = (pathRegex: RegExp, keys: Layer['keys']): string => {
+const getPathString = (
+  pathRegex: RegExp,
+  keys: Layer['keys']
+): string | null => {
   const pathRegexpSource = pathRegex.source
 
   let regexString = pathRegexpSource
@@ -30,9 +33,9 @@ const getPathString = (pathRegex: RegExp, keys: Layer['keys']): string => {
     regexStringExecArray = regexPattern.path.exec(regexString)
   }
 
-  const pathString = regexStringExecArray![1].replace(/\\\//g, '/')
+  const pathString = regexStringExecArray?.[1].replace(/\\\//g, '/')
 
-  return pathString
+  return pathString ?? null
 }
 
 const processRoute = (
@@ -111,12 +114,14 @@ export const processExpressRouters = (
     if (regexPattern.path.test(layer.regexp.source)) {
       const parsedPath = getPathString(layer.regexp, layer.keys)
 
-      processExpressRouters(
-        spec,
-        layer.handle as Router,
-        basePath + '/' + parsedPath,
-        plugins
-      )
+      if (parsedPath) {
+        processExpressRouters(
+          spec,
+          layer.handle as Router,
+          basePath + '/' + parsedPath,
+          plugins
+        )
+      }
 
       continue
     }

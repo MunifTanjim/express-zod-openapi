@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`getSpecificationPlugin request validation options: segmentOrder (custom) validates body before query 1`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_enum_value\\",
-    \\"options\\": [
-      \\"plastic\\",
-      \\"rubber\\",
-      \\"wood\\"
+    "code": "invalid_enum_value",
+    "options": [
+      "plastic",
+      "rubber",
+      "wood"
     ],
-    \\"path\\": [
-      \\"type\\"
+    "path": [
+      "type"
     ],
-    \\"message\\": \\"Invalid enum value. Expected 'plastic' | 'rubber' | 'wood', received 'paper'\\"
+    "message": "Invalid enum value. Expected 'plastic' | 'rubber' | 'wood', received 'paper'"
   }
 ]",
     "segment": "body",
@@ -23,17 +23,17 @@ Object {
 `;
 
 exports[`getSpecificationPlugin request validation options: segmentOrder (custom) validates body before query 2`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_type\\",
-    \\"expected\\": \\"number\\",
-    \\"received\\": \\"undefined\\",
-    \\"path\\": [
-      \\"count\\"
+    "code": "invalid_type",
+    "expected": "number",
+    "received": "undefined",
+    "path": [
+      "count"
     ],
-    \\"message\\": \\"Required\\"
+    "message": "Required"
   }
 ]",
     "segment": "query",
@@ -42,17 +42,17 @@ Object {
 `;
 
 exports[`getSpecificationPlugin request validation options: segmentOrder (default) validates query before body 1`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_type\\",
-    \\"expected\\": \\"number\\",
-    \\"received\\": \\"undefined\\",
-    \\"path\\": [
-      \\"count\\"
+    "code": "invalid_type",
+    "expected": "number",
+    "received": "undefined",
+    "path": [
+      "count"
     ],
-    \\"message\\": \\"Required\\"
+    "message": "Required"
   }
 ]",
     "segment": "query",
@@ -61,20 +61,20 @@ Object {
 `;
 
 exports[`getSpecificationPlugin request validation options: segmentOrder (default) validates query before body 2`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_enum_value\\",
-    \\"options\\": [
-      \\"plastic\\",
-      \\"rubber\\",
-      \\"wood\\"
+    "code": "invalid_enum_value",
+    "options": [
+      "plastic",
+      "rubber",
+      "wood"
     ],
-    \\"path\\": [
-      \\"type\\"
+    "path": [
+      "type"
     ],
-    \\"message\\": \\"Invalid enum value. Expected 'plastic' | 'rubber' | 'wood', received 'paper'\\"
+    "message": "Invalid enum value. Expected 'plastic' | 'rubber' | 'wood', received 'paper'"
   }
 ]",
     "segment": "body",
@@ -83,20 +83,20 @@ Object {
 `;
 
 exports[`getSpecificationPlugin request validation segment validation validates body 1`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_enum_value\\",
-    \\"options\\": [
-      \\"plastic\\",
-      \\"rubber\\",
-      \\"wood\\"
+    "code": "invalid_enum_value",
+    "options": [
+      "plastic",
+      "rubber",
+      "wood"
     ],
-    \\"path\\": [
-      \\"type\\"
+    "path": [
+      "type"
     ],
-    \\"message\\": \\"Invalid enum value. Expected 'plastic' | 'rubber' | 'wood', received 'paper'\\"
+    "message": "Invalid enum value. Expected 'plastic' | 'rubber' | 'wood', received 'paper'"
   }
 ]",
     "segment": "body",
@@ -105,15 +105,15 @@ Object {
 `;
 
 exports[`getSpecificationPlugin request validation segment validation validates headers 1`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"validation\\": \\"regex\\",
-    \\"code\\": \\"invalid_string\\",
-    \\"message\\": \\"Invalid\\",
-    \\"path\\": [
-      \\"authorization\\"
+    "validation": "regex",
+    "code": "invalid_string",
+    "message": "Invalid",
+    "path": [
+      "authorization"
     ]
   }
 ]",
@@ -123,17 +123,17 @@ Object {
 `;
 
 exports[`getSpecificationPlugin request validation segment validation validates params 1`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_type\\",
-    \\"expected\\": \\"number\\",
-    \\"received\\": \\"string\\",
-    \\"path\\": [
-      \\"id\\"
+    "code": "invalid_type",
+    "expected": "number",
+    "received": "string",
+    "path": [
+      "id"
     ],
-    \\"message\\": \\"Expected number, received string\\"
+    "message": "Expected number, received string"
   }
 ]",
     "segment": "params",
@@ -142,17 +142,17 @@ Object {
 `;
 
 exports[`getSpecificationPlugin request validation segment validation validates query 1`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_type\\",
-    \\"expected\\": \\"number\\",
-    \\"received\\": \\"undefined\\",
-    \\"path\\": [
-      \\"count\\"
+    "code": "invalid_type",
+    "expected": "number",
+    "received": "undefined",
+    "path": [
+      "count"
     ],
-    \\"message\\": \\"Required\\"
+    "message": "Required"
   }
 ]",
     "segment": "query",
@@ -161,17 +161,17 @@ Object {
 `;
 
 exports[`getSpecificationPlugin request validation segment validation validates query 2`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_type\\",
-    \\"expected\\": \\"number\\",
-    \\"received\\": \\"string\\",
-    \\"path\\": [
-      \\"count\\"
+    "code": "invalid_type",
+    "expected": "number",
+    "received": "string",
+    "path": [
+      "count"
     ],
-    \\"message\\": \\"Expected number, received string\\"
+    "message": "Expected number, received string"
   }
 ]",
     "segment": "query",
@@ -180,17 +180,17 @@ Object {
 `;
 
 exports[`getSpecificationPlugin response validation segment validation validates body 1`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_type\\",
-    \\"expected\\": \\"number\\",
-    \\"received\\": \\"string\\",
-    \\"path\\": [
-      \\"pong\\"
+    "code": "invalid_type",
+    "expected": "number",
+    "received": "string",
+    "path": [
+      "pong"
     ],
-    \\"message\\": \\"Expected number, received string\\"
+    "message": "Expected number, received string"
   }
 ]",
     "segment": "body",
@@ -199,17 +199,17 @@ Object {
 `;
 
 exports[`getSpecificationPlugin response validation segment validation validates headers 1`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_type\\",
-    \\"expected\\": \\"number\\",
-    \\"received\\": \\"undefined\\",
-    \\"path\\": [
-      \\"x-count\\"
+    "code": "invalid_type",
+    "expected": "number",
+    "received": "undefined",
+    "path": [
+      "x-count"
     ],
-    \\"message\\": \\"Required\\"
+    "message": "Required"
   }
 ]",
     "segment": "headers",
@@ -218,17 +218,17 @@ Object {
 `;
 
 exports[`getSpecificationPlugin response validation segment validation works for res.send inside callback 1`] = `
-Object {
-  "error": Object {
+{
+  "error": {
     "message": "[
   {
-    \\"code\\": \\"invalid_type\\",
-    \\"expected\\": \\"number\\",
-    \\"received\\": \\"string\\",
-    \\"path\\": [
-      \\"pong\\"
+    "code": "invalid_type",
+    "expected": "number",
+    "received": "string",
+    "path": [
+      "pong"
     ],
-    \\"message\\": \\"Expected number, received string\\"
+    "message": "Expected number, received string"
   }
 ]",
     "segment": "body",

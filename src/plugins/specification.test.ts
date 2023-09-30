@@ -235,14 +235,14 @@ describe('getSpecificationPlugin', () => {
         const response = await request(app).post('/ping').send({ count: '42' })
         expect(response.status).toBe(200)
         expect(mockFn.mock.calls).toMatchInlineSnapshot(`
-            Array [
-              Array [
-                Object {
-                  "count": 42,
-                },
-              ],
-            ]
-          `)
+[
+  [
+    {
+      "count": 42,
+    },
+  ],
+]
+`)
       })
     })
 

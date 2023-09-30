@@ -1,31 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ExpressOpenAPI basic request schema generation 1`] = `
-Object {
-  "/ping": Object {
-    "post": Object {
+{
+  "/ping": {
+    "post": {
       "operationId": "ping",
-      "parameters": Array [
-        Object {
+      "parameters": [
+        {
           "in": "query",
           "name": "count",
           "required": true,
-          "schema": Object {
+          "schema": {
             "description": "number of times ping will pong",
             "type": "integer",
           },
         },
       ],
-      "requestBody": Object {
-        "content": Object {
-          "application/json": Object {
-            "schema": Object {
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
               "$schema": "http://json-schema.org/draft-07/schema#",
               "additionalProperties": false,
-              "properties": Object {
-                "type": Object {
+              "properties": {
+                "type": {
                   "default": "rubber",
-                  "enum": Array [
+                  "enum": [
                     "plastic",
                     "rubber",
                     "wood",
@@ -38,8 +38,8 @@ Object {
           },
         },
       },
-      "responses": Object {
-        "default": Object {
+      "responses": {
+        "default": {
           "description": "",
         },
       },
@@ -49,22 +49,22 @@ Object {
 `;
 
 exports[`ExpressOpenAPI basic response schema generation 1`] = `
-Object {
-  "/ping": Object {
-    "post": Object {
-      "responses": Object {
-        "200": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
+{
+  "/ping": {
+    "post": {
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
                 "$schema": "http://json-schema.org/draft-07/schema#",
                 "additionalProperties": false,
-                "properties": Object {
-                  "pong": Object {
+                "properties": {
+                  "pong": {
                     "type": "integer",
                   },
                 },
-                "required": Array [
+                "required": [
                   "pong",
                 ],
                 "type": "object",
@@ -72,16 +72,16 @@ Object {
             },
           },
           "description": "",
-          "headers": Object {
-            "x-count": Object {
+          "headers": {
+            "x-count": {
               "required": true,
-              "schema": Object {
+              "schema": {
                 "type": "integer",
               },
             },
           },
         },
-        "default": Object {
+        "default": {
           "description": "",
         },
       },

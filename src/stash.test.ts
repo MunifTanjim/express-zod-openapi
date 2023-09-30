@@ -12,10 +12,10 @@ describe('Stash', () => {
     stash.store(handler, 'pong')
 
     expect(Object.getOwnPropertySymbols(handler)).toMatchInlineSnapshot(`
-      Array [
-        Symbol(forty-two),
-      ]
-    `)
+[
+  Symbol(forty-two),
+]
+`)
 
     expect(
       stash.find(
@@ -50,10 +50,10 @@ describe('Stash', () => {
     stash.store(handler, 'pong')
 
     expect(Object.keys(handler)).toMatchInlineSnapshot(`
-      Array [
-        "forty-two",
-      ]
-    `)
+[
+  "forty-two",
+]
+`)
 
     expect(
       stash.find(

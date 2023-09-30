@@ -39,17 +39,17 @@ describe('processExpressRouters', () => {
       const pathMethods = getPathMethods(specification)
 
       expect(pathMethods).toMatchInlineSnapshot(`
-        Object {
-          "/": Array [
-            "post",
-          ],
-          "/{id}": Array [
-            "get",
-            "put",
-            "delete",
-          ],
-        }
-      `)
+{
+  "/": [
+    "post",
+  ],
+  "/{id}": [
+    "get",
+    "put",
+    "delete",
+  ],
+}
+`)
     })
 
     test('router', () => {
@@ -63,17 +63,17 @@ describe('processExpressRouters', () => {
       const pathMethods = getPathMethods(specification)
 
       expect(pathMethods).toMatchInlineSnapshot(`
-        Object {
-          "/": Array [
-            "post",
-          ],
-          "/{id}": Array [
-            "get",
-            "put",
-            "delete",
-          ],
-        }
-      `)
+{
+  "/": [
+    "post",
+  ],
+  "/{id}": [
+    "get",
+    "put",
+    "delete",
+  ],
+}
+`)
     })
 
     test('app + router', () => {
@@ -94,25 +94,25 @@ describe('processExpressRouters', () => {
       const pathMethods = getPathMethods(specification)
 
       expect(pathMethods).toMatchInlineSnapshot(`
-        Object {
-          "/": Array [
-            "post",
-          ],
-          "/router": Array [
-            "post",
-          ],
-          "/router/{key}": Array [
-            "get",
-            "put",
-            "delete",
-          ],
-          "/{id}": Array [
-            "get",
-            "put",
-            "delete",
-          ],
-        }
-      `)
+{
+  "/": [
+    "post",
+  ],
+  "/router": [
+    "post",
+  ],
+  "/router/{key}": [
+    "get",
+    "put",
+    "delete",
+  ],
+  "/{id}": [
+    "get",
+    "put",
+    "delete",
+  ],
+}
+`)
     })
 
     test('app + router + subRouter', () => {
@@ -137,30 +137,30 @@ describe('processExpressRouters', () => {
       const pathMethods = getPathMethods(specification)
 
       expect(pathMethods).toMatchInlineSnapshot(`
-        Object {
-          "/": Array [
-            "post",
-          ],
-          "/router": Array [
-            "post",
-          ],
-          "/router/sub-router": Array [
-            "post",
-          ],
-          "/router/sub-router/{name}": Array [
-            "get",
-            "put",
-          ],
-          "/router/{key}": Array [
-            "get",
-            "put",
-          ],
-          "/{id}": Array [
-            "get",
-            "put",
-          ],
-        }
-      `)
+{
+  "/": [
+    "post",
+  ],
+  "/router": [
+    "post",
+  ],
+  "/router/sub-router": [
+    "post",
+  ],
+  "/router/sub-router/{name}": [
+    "get",
+    "put",
+  ],
+  "/router/{key}": [
+    "get",
+    "put",
+  ],
+  "/{id}": [
+    "get",
+    "put",
+  ],
+}
+`)
     })
   })
 

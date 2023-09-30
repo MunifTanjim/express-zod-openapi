@@ -83,30 +83,30 @@ describe('openapi/specification', () => {
     test('toJSON', () => {
       const spec = new OpenAPISpecification()
       expect(spec.toJSON()).toMatchInlineSnapshot(`
-        Object {
-          "components": Object {
-            "callbacks": Object {},
-            "examples": Object {},
-            "headers": Object {},
-            "links": Object {},
-            "parameters": Object {},
-            "requestBodies": Object {},
-            "responses": Object {},
-            "schemas": Object {},
-            "securitySchemes": Object {},
-          },
-          "externalDocs": undefined,
-          "info": Object {
-            "title": "",
-            "version": "",
-          },
-          "openapi": "3.0.0",
-          "paths": Object {},
-          "security": Array [],
-          "servers": Array [],
-          "tags": Array [],
-        }
-      `)
+{
+  "components": {
+    "callbacks": {},
+    "examples": {},
+    "headers": {},
+    "links": {},
+    "parameters": {},
+    "requestBodies": {},
+    "responses": {},
+    "schemas": {},
+    "securitySchemes": {},
+  },
+  "externalDocs": undefined,
+  "info": {
+    "title": "",
+    "version": "",
+  },
+  "openapi": "3.0.0",
+  "paths": {},
+  "security": [],
+  "servers": [],
+  "tags": [],
+}
+`)
     })
 
     test('toString', () => {

@@ -14,7 +14,7 @@ import {
 } from 'openapi3-ts'
 import { Schema, TypeOf, ZodError } from 'zod'
 import { zodToJsonSchema } from '../zod'
-import { ExpressOpenAPIPlugin } from './types'
+import type { ExpressOpenAPIPlugin, RouteProcessor } from './types'
 
 export type RequestSegment =
   | 'body'
@@ -222,7 +222,142 @@ function setupResponseValidation(
   }
 }
 
-export const getSpecificationPlugin = ({
+const routeProcessor: RouteProcessor<SpecInfo> = (
+  specification,
+  specInfo,
+  { path, method },
+) => {
+  for (const [segment, schema] of specInfo.req.entries()) {
+    if (!schema) {
+      continue
+    }
+
+    if (specInfo.operationId) {
+      specification.setPathItemOperation(path, method, {
+        ...specification.getPathItemOperation(path, method)!,
+        operationId: specInfo.operationId,
+      })
+    }
+
+    if (segment === 'body') {
+      const result = zodToJsonSchema(schema)
+
+      const requestBody: RequestBodyObject = {
+        content: {
+          'application/json': {
+            // @ts-expect-error ...
+            schema: result,
+          },
+        },
+      }
+
+      specification.setPathItemOperationRequestBody(path, method, requestBody)
+
+      continue
+    }
+
+    const location = parameterLocationBySegment[segment]
+
+    const result = zodToJsonSchema(schema)
+
+    if ('properties' in result) {
+      const { properties, required = [] } = result
+
+      if (properties) {
+        for (const [name, schema] of Object.entries(properties)) {
+          const parameterObject: ParameterObject = {
+            name,
+            in: location,
+            // @ts-expect-error ...
+            schema: schema,
+            required: required.includes(name),
+          }
+
+          specification.addPathItemOperationParameter(
+            path,
+            method,
+            parameterObject,
+          )
+        }
+      }
+    }
+  }
+
+  for (const [key, schemaBySegment] of specInfo.res.entries()) {
+    if (!schemaBySegment) {
+      continue
+    }
+
+    const httpStatusCode = key as number | 'default'
+
+    if (schemaBySegment.body) {
+      const result = zodToJsonSchema(schemaBySegment.body)
+
+      const responseObject: ResponseObject = {
+        ...specification.getPathItemOperationResponse(
+          path,
+          method,
+          httpStatusCode,
+        ),
+        description: '',
+        content: {
+          'application/json': {
+            // @ts-expect-error ...
+            schema: result,
+          },
+        },
+      }
+
+      specification.setPathItemOperationResponse(
+        path,
+        method,
+        httpStatusCode,
+        responseObject,
+      )
+    }
+
+    if (schemaBySegment.headers) {
+      const result = zodToJsonSchema(schemaBySegment.headers)
+
+      if ('properties' in result) {
+        const { properties, required = [] } = result
+
+        const headersObject: HeadersObject = {}
+
+        if (properties) {
+          for (const [name, schema] of Object.entries(properties)) {
+            const headerObject: HeaderObject = {
+              // @ts-expect-error ...
+              schema: schema,
+              required: required.includes(name),
+            }
+
+            headersObject[name] = headerObject
+          }
+        }
+
+        const responseObject: ResponseObject = {
+          ...specification.getPathItemOperationResponse(
+            path,
+            method,
+            httpStatusCode,
+          ),
+          description: '',
+          headers: headersObject,
+        }
+
+        specification.setPathItemOperationResponse(
+          path,
+          method,
+          httpStatusCode,
+          responseObject,
+        )
+      }
+    }
+  }
+}
+
+const create = ({
   req: reqConfig = {},
   res: resConfig = {},
 }: {
@@ -311,141 +446,18 @@ export const getSpecificationPlugin = ({
       return validationMiddleware
     },
 
-    processRoute: (specification, specInfo, { path, method }): void => {
-      for (const [segment, schema] of specInfo.req.entries()) {
-        if (!schema) {
-          continue
-        }
-
-        if (specInfo.operationId) {
-          specification.setPathItemOperation(path, method, {
-            ...specification.getPathItemOperation(path, method)!,
-            operationId: specInfo.operationId,
-          })
-        }
-
-        if (segment === 'body') {
-          const result = zodToJsonSchema(schema)
-
-          const requestBody: RequestBodyObject = {
-            content: {
-              'application/json': {
-                // @ts-expect-error ...
-                schema: result,
-              },
-            },
-          }
-
-          specification.setPathItemOperationRequestBody(
-            path,
-            method,
-            requestBody,
-          )
-
-          continue
-        }
-
-        const location = parameterLocationBySegment[segment]
-
-        const result = zodToJsonSchema(schema)
-
-        if ('properties' in result) {
-          const { properties, required = [] } = result
-
-          if (properties) {
-            for (const [name, schema] of Object.entries(properties)) {
-              const parameterObject: ParameterObject = {
-                name,
-                in: location,
-                // @ts-expect-error ...
-                schema: schema,
-                required: required.includes(name),
-              }
-
-              specification.addPathItemOperationParameter(
-                path,
-                method,
-                parameterObject,
-              )
-            }
-          }
-        }
-      }
-
-      for (const [key, schemaBySegment] of specInfo.res.entries()) {
-        if (!schemaBySegment) {
-          continue
-        }
-
-        const httpStatusCode = key as number | 'default'
-
-        if (schemaBySegment.body) {
-          const result = zodToJsonSchema(schemaBySegment.body)
-
-          const responseObject: ResponseObject = {
-            ...specification.getPathItemOperationResponse(
-              path,
-              method,
-              httpStatusCode,
-            ),
-            description: '',
-            content: {
-              'application/json': {
-                // @ts-expect-error ...
-                schema: result,
-              },
-            },
-          }
-
-          specification.setPathItemOperationResponse(
-            path,
-            method,
-            httpStatusCode,
-            responseObject,
-          )
-        }
-
-        if (schemaBySegment.headers) {
-          const result = zodToJsonSchema(schemaBySegment.headers)
-
-          if ('properties' in result) {
-            const { properties, required = [] } = result
-
-            const headersObject: HeadersObject = {}
-
-            if (properties) {
-              for (const [name, schema] of Object.entries(properties)) {
-                const headerObject: HeaderObject = {
-                  // @ts-expect-error ...
-                  schema: schema,
-                  required: required.includes(name),
-                }
-
-                headersObject[name] = headerObject
-              }
-            }
-
-            const responseObject: ResponseObject = {
-              ...specification.getPathItemOperationResponse(
-                path,
-                method,
-                httpStatusCode,
-              ),
-              description: '',
-              headers: headersObject,
-            }
-
-            specification.setPathItemOperationResponse(
-              path,
-              method,
-              httpStatusCode,
-              responseObject,
-            )
-          }
-        }
-      }
-    },
+    processRoute: routeProcessor,
   }
 
   return specificationPlugin
+}
+
+/**
+ * @deprecated Use `SpecificationPlugin.create`
+ */
+export const getSpecificationPlugin = create
+
+export const SpecificationPlugin = {
+  create,
+  routeProcessor,
 }

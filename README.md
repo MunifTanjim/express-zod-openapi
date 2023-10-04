@@ -23,15 +23,15 @@ npm install --save express-zod-openapi
 import express from 'express'
 import {
   ExpressOpenAPI,
-  getSpecificationPlugin,
   RequestValidationError,
   ResponseValidationError,
+  SpecificationPlugin,
 } from 'express-zod-openapi'
 import { z } from 'zod'
 
 const expressOpenApi = new ExpressOpenAPI()
 
-const specificationPlugin = getSpecificationPlugin()
+const specificationPlugin = SpecificationPlugin.create()
 
 const specification = expressOpenApi.registerPlugin(specificationPlugin)
 

@@ -3,9 +3,9 @@ import request from 'supertest'
 import { z } from 'zod'
 import {
   GetSpecificationMiddleware,
-  getSpecificationPlugin,
   RequestValidationError,
   ResponseValidationError,
+  SpecificationPlugin,
 } from '.'
 import { ExpressOpenAPI } from '../index'
 
@@ -18,7 +18,7 @@ const preprocessors = {
 
 describe('getSpecificationPlugin', () => {
   test('returns plugin', () => {
-    const plugin = getSpecificationPlugin()
+    const plugin = SpecificationPlugin.create()
     expect(plugin.name).toMatchInlineSnapshot(`"zod-openapi-spec"`)
     expect(plugin.getMiddleware).toBeDefined()
     expect(plugin.processRoute).toBeDefined()
@@ -63,7 +63,7 @@ describe('getSpecificationPlugin', () => {
         app = express()
         app.use(express.json())
 
-        const validatorPlugin = getSpecificationPlugin({
+        const validatorPlugin = SpecificationPlugin.create({
           res: {
             skipValidation: true,
           },
@@ -198,7 +198,7 @@ describe('getSpecificationPlugin', () => {
         app = express()
         app.use(express.json())
 
-        const validatorPlugin = getSpecificationPlugin({
+        const validatorPlugin = SpecificationPlugin.create({
           res: {
             skipValidation: true,
           },
@@ -253,7 +253,7 @@ describe('getSpecificationPlugin', () => {
         app = express()
         app.use(express.json())
 
-        const validatorPlugin = getSpecificationPlugin({
+        const validatorPlugin = SpecificationPlugin.create({
           res: {
             skipValidation: true,
           },
@@ -306,7 +306,7 @@ describe('getSpecificationPlugin', () => {
         app = express()
         app.use(express.json())
 
-        const validatorPlugin = getSpecificationPlugin({
+        const validatorPlugin = SpecificationPlugin.create({
           res: {
             skipValidation: true,
           },
@@ -391,7 +391,7 @@ describe('getSpecificationPlugin', () => {
         app = express()
         app.use(express.json())
 
-        const validatorPlugin = getSpecificationPlugin({
+        const validatorPlugin = SpecificationPlugin.create({
           req: {
             skipValidation: true,
           },
@@ -522,7 +522,7 @@ describe('getSpecificationPlugin', () => {
         app = express()
         app.use(express.json())
 
-        const specificationPlugin = getSpecificationPlugin({
+        const specificationPlugin = SpecificationPlugin.create({
           req: {
             skipValidation: true,
           },

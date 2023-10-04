@@ -42,3 +42,11 @@
 * include type only files in build ([e3d766f](https://github.com/MunifTanjim/express-zod-openapi/commit/e3d766fb72de02d0800ddd2c23b1d5e79797333c))
 * missing case for express path extraction ([f4a02f3](https://github.com/MunifTanjim/express-zod-openapi/commit/f4a02f3d535544214e3e03aaf3976bd24ab62c65))
 
+## [0.0.7](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.6...0.0.7) (2023-10-04)
+
+
+### Features
+
+* allow getMiddleware to return Handler[] ([5140f0a](https://github.com/MunifTanjim/express-zod-openapi/commit/5140f0a626b1dff26c0b4cc3cfd8265d872c2eae))
+* export SpecificationPlugin.routeProcessor ([afa6660](https://github.com/MunifTanjim/express-zod-openapi/commit/afa666028f47f85431e191bc67f1845d1b7e4ae6))
+

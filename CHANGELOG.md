@@ -34,3 +34,11 @@
 
 * make operationId optional ([e87d564](https://github.com/MunifTanjim/express-zod-openapi/commit/e87d564d09d1be31359148884f31735aab53cf0d))
 
+## [0.0.6](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.5...0.0.6) (2023-10-04)
+
+
+### Bug Fixes
+
+* include type only files in build ([e3d766f](https://github.com/MunifTanjim/express-zod-openapi/commit/e3d766fb72de02d0800ddd2c23b1d5e79797333c))
+* missing case for express path extraction ([f4a02f3](https://github.com/MunifTanjim/express-zod-openapi/commit/f4a02f3d535544214e3e03aaf3976bd24ab62c65))
+

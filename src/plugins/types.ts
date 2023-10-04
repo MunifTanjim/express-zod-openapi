@@ -19,7 +19,7 @@ export type RouteProcessor<StashValue> = (
 
 export interface ExpressOpenAPIPlugin<
   StashValue = unknown,
-  GetMiddleware extends (...params: any[]) => Handler = (
+  GetMiddleware extends (...params: any[]) => Handler | Handler[] = (
     ...params: any[]
   ) => Handler,
 > {

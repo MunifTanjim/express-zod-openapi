@@ -33,7 +33,7 @@ export class ExpressOpenAPI {
 
   registerPlugin = <
     StashType,
-    GetMiddleware extends (...params: any[]) => Handler,
+    GetMiddleware extends (...params: any[]) => Handler | Handler[],
   >(
     plugin: ExpressOpenAPIPlugin<StashType, GetMiddleware>,
   ): ((...params: Parameters<GetMiddleware>) => ReturnType<GetMiddleware>) => {

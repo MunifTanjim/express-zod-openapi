@@ -1,10 +1,10 @@
-import {
-  Handler,
+import type {
   Request as ExpressRequest,
   RequestHandler as ExpressRequestHandler,
   Response as ExpressResponse,
+  Handler,
 } from 'express'
-import {
+import type {
   HeaderObject,
   HeadersObject,
   ParameterLocation,
@@ -12,19 +12,17 @@ import {
   RequestBodyObject,
   ResponseObject,
 } from 'openapi3-ts'
-import { Schema, TypeOf, ZodError } from 'zod'
+import type { Schema, TypeOf } from 'zod'
+import { setupResponseValidation, validateRequest } from '../utils'
 import { zodToJsonSchema } from '../zod'
-import type { ExpressOpenAPIPlugin, RouteProcessor } from './types'
+import type {
+  ExpressOpenAPIPlugin,
+  RequestSegment,
+  ResponseSegment,
+  RouteProcessor,
+} from './types'
 
-export type RequestSegment =
-  | 'body'
-  | 'cookies'
-  | 'headers'
-  | 'params'
-  | 'query'
-  | 'signedCookies'
-
-export type ResponseSegment = 'body' | 'headers'
+export type { RequestSegment, ResponseSegment } from './types'
 
 type SpecInfo = {
   operationId?: string
@@ -102,30 +100,6 @@ type SpecificationPlugin = ExpressOpenAPIPlugin<
   GetSpecificationMiddleware
 >
 
-export class RequestValidationError extends Error {
-  segment: RequestSegment
-  validationError: ZodError
-
-  constructor(validationError: ZodError, segment: RequestSegment) {
-    super(validationError.message)
-
-    this.segment = segment
-    this.validationError = validationError
-  }
-}
-
-export class ResponseValidationError extends Error {
-  segment: ResponseSegment
-  validationError: ZodError
-
-  constructor(validationError: ZodError, segment: ResponseSegment) {
-    super(validationError.message)
-
-    this.segment = segment
-    this.validationError = validationError
-  }
-}
-
 const parameterLocationBySegment: {
   [key in Exclude<RequestSegment, 'body'>]: ParameterLocation
 } = {
@@ -134,92 +108,6 @@ const parameterLocationBySegment: {
   headers: 'header',
   params: 'path',
   query: 'query',
-}
-
-async function validateRequest(
-  req: ExpressRequest,
-  specInfo: SpecInfo,
-  segmentOrder: RequestSegment[],
-) {
-  await segmentOrder.reduce((promise, segment) => {
-    return promise.then(async () => {
-      const schema = specInfo.req.get(segment)
-
-      if (!schema) {
-        return null
-      }
-
-      const result = await schema.safeParseAsync(req[segment])
-
-      if (!result.success) {
-        throw new RequestValidationError(result.error, segment)
-      }
-
-      req[segment] = result.data
-
-      return null
-    })
-  }, Promise.resolve(null))
-}
-
-function setupResponseValidation(
-  res: ExpressResponse,
-  specInfo: SpecInfo,
-  segmentOrder: ResponseSegment[],
-  next: (err?: unknown) => void,
-) {
-  const originalSend = res.send
-
-  res.send = function validateAndSendResponse(...args) {
-    res.send = originalSend
-
-    const body = args[0]
-
-    const isJsonContent = /application\/json/.test(
-      String(res.get('content-type')),
-    )
-
-    const value: { [key in ResponseSegment]: unknown } = {
-      body: isJsonContent ? JSON.parse(body) : body,
-      headers: res.getHeaders(),
-    }
-
-    const schemaBySegment = specInfo.res.has(String(res.statusCode))
-      ? specInfo.res.get(String(res.statusCode))
-      : specInfo.res.get('default')
-
-    if (!schemaBySegment) {
-      next(
-        new Error(
-          `Validation Schema not found for Response(${res.statusCode})`,
-        ),
-      )
-      return res
-    }
-
-    for (const segment of segmentOrder) {
-      const schema = schemaBySegment[segment]
-
-      if (!schema) {
-        continue
-      }
-
-      const result = schema.safeParse(value[segment])
-
-      if (!result.success) {
-        next(new ResponseValidationError(result.error, segment))
-        return res
-      }
-
-      if (segment === 'body') {
-        value[segment] = result.data
-      }
-    }
-
-    return originalSend.apply(res, [
-      isJsonContent ? JSON.stringify(value.body) : value.body,
-    ])
-  }
 }
 
 const routeProcessor: RouteProcessor<SpecInfo> = (
@@ -426,12 +314,12 @@ const create = ({
         next,
       ): Promise<void> => {
         if (!skipResponseValidation && validationSchema.res) {
-          setupResponseValidation(res, specInfo, resSegmentOrder, next)
+          setupResponseValidation(res, specInfo.res, resSegmentOrder, next)
         }
 
         if (!skipRequestValidation && validationSchema.req) {
           try {
-            await validateRequest(req, specInfo, reqSegmentOrder)
+            await validateRequest(req, specInfo.req, reqSegmentOrder)
           } catch (err) {
             next(err)
             return

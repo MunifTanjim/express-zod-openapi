@@ -37,3 +37,13 @@ export interface RegisteredExpressOpenAPIPlugin {
   stash: Stash<any>
   processRoute: RouteProcessor<any>
 }
+
+export type RequestSegment =
+  | 'body'
+  | 'cookies'
+  | 'headers'
+  | 'params'
+  | 'query'
+  | 'signedCookies'
+
+export type ResponseSegment = 'body' | 'headers'

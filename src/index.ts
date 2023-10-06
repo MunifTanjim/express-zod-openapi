@@ -15,15 +15,17 @@ export type {
   RouteProcessor,
 } from './plugins'
 
+export { SpecificationPlugin } from './plugins/specification'
 export type {
   Request,
   RequestHandler,
   Response,
   SpecificationSchema,
 } from './plugins/specification'
-export { SpecificationPlugin } from './plugins/specification'
 
 export type { HttpMethod, RequestSegment, ResponseSegment } from './types'
+
+export { setupResponseValidation, validateRequest } from './utils'
 
 export class ExpressOpenAPI {
   private plugins: RegisteredExpressOpenAPIPlugin[] = []

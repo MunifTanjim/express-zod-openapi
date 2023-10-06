@@ -60,3 +60,10 @@
 * export RequestValidationError and ResponseValidationError ([b8be573](https://github.com/MunifTanjim/express-zod-openapi/commit/b8be573ad7b745ef36f37a2723bd219cb18ba5d1))
 * export setupResponseValidation and validateRequest ([a6c285b](https://github.com/MunifTanjim/express-zod-openapi/commit/a6c285b2093e0479a3d8aca874a2d52c3e7ecbc9))
 
+## [0.0.10](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.9...0.0.10) (2023-10-06)
+
+
+### Features
+
+* export RequestSegmentType and RequestSegmentType ([986dcb2](https://github.com/MunifTanjim/express-zod-openapi/commit/986dcb2f4168e458b282170749dcd302561b8991))
+

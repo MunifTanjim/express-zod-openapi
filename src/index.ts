@@ -27,6 +27,8 @@ export type { HttpMethod, RequestSegment, ResponseSegment } from './types'
 
 export { setupResponseValidation, validateRequest } from './utils'
 
+export { RequestValidationError, ResponseValidationError } from './zod'
+
 export class ExpressOpenAPI {
   private plugins: RegisteredExpressOpenAPIPlugin[] = []
   private useStringStashKey: boolean

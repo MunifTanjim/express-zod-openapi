@@ -20,7 +20,7 @@ export type SpecificationSchema = {
 
 type UnionTypeOf<T extends Schema<any>> = T extends unknown ? TypeOf<T> : never
 
-type ResponseSegmentType<
+export type ResponseSegmentType<
   VS extends SpecificationSchema,
   S extends ResponseSegment,
   D = unknown,
@@ -32,7 +32,7 @@ type ResponseSegmentType<
       NonNullable<NonNullable<VS['res']>[keyof NonNullable<VS['res']>][S]>
     >
 
-type RequestSegmentType<
+export type RequestSegmentType<
   VS extends SpecificationSchema,
   S extends RequestSegment,
   D = unknown,

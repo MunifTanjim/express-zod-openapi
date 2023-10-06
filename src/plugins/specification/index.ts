@@ -17,7 +17,9 @@ import type { SpecificationSchema } from './types'
 export type {
   Request,
   RequestHandler,
+  RequestSegmentType,
   Response,
+  ResponseSegmentType,
   SpecificationSchema,
 } from './types'
 

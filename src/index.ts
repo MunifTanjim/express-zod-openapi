@@ -19,7 +19,9 @@ export { SpecificationPlugin } from './plugins/specification'
 export type {
   Request,
   RequestHandler,
+  RequestSegmentType,
   Response,
+  ResponseSegmentType,
   SpecificationSchema,
 } from './plugins/specification'
 

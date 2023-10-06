@@ -50,3 +50,5 @@
 * allow getMiddleware to return Handler[] ([5140f0a](https://github.com/MunifTanjim/express-zod-openapi/commit/5140f0a626b1dff26c0b4cc3cfd8265d872c2eae))
 * export SpecificationPlugin.routeProcessor ([afa6660](https://github.com/MunifTanjim/express-zod-openapi/commit/afa666028f47f85431e191bc67f1845d1b7e4ae6))
 
+## [0.0.8](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.7...0.0.8) (2023-10-06)
+

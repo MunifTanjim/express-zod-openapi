@@ -1,13 +1,13 @@
-import express, { Application, ErrorRequestHandler, Handler } from 'express'
+import express, {
+  type Application,
+  type ErrorRequestHandler,
+  type Handler,
+} from 'express'
 import request from 'supertest'
 import { z } from 'zod'
-import {
-  GetSpecificationMiddleware,
-  RequestValidationError,
-  ResponseValidationError,
-  SpecificationPlugin,
-} from '.'
-import { ExpressOpenAPI } from '../index'
+import { SpecificationPlugin, type GetSpecificationMiddleware } from '.'
+import { ExpressOpenAPI } from '../..'
+import { RequestValidationError, ResponseValidationError } from '../../zod'
 
 const preprocessors = {
   numberString: (v: unknown) => {

@@ -1,14 +1,29 @@
-import { Application, Handler, Router } from 'express'
+import type { Application, Handler, Router } from 'express'
 import { OpenAPISpecification, processExpressRouters } from './openapi'
-import {
+import type {
   ExpressOpenAPIPlugin,
   ExpressOpenAPIPluginInternals,
   RegisteredExpressOpenAPIPlugin,
 } from './plugins'
 import { Stash } from './stash'
 
-export * from './plugins'
 export { OpenAPISpecification } from './openapi'
+
+export type {
+  ExpressOpenAPIPlugin,
+  ExpressOpenAPIPluginInternals,
+  RouteProcessor,
+} from './plugins'
+
+export type {
+  Request,
+  RequestHandler,
+  Response,
+  SpecificationSchema,
+} from './plugins/specification'
+export { SpecificationPlugin } from './plugins/specification'
+
+export type { HttpMethod, RequestSegment, ResponseSegment } from './types'
 
 export class ExpressOpenAPI {
   private plugins: RegisteredExpressOpenAPIPlugin[] = []

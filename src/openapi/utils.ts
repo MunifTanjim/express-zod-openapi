@@ -1,4 +1,4 @@
-import { ReferenceObject } from 'openapi3-ts'
+import type { ReferenceObject } from 'openapi3-ts'
 
 export const isReferenceObject = (
   referenceObject: { [key: string]: unknown } | ReferenceObject,

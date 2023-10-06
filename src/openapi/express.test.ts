@@ -1,9 +1,9 @@
-import express, { Handler } from 'express'
-import { OpenAPIObject } from 'openapi3-ts'
+import express, { type Handler } from 'express'
+import type { OpenAPIObject } from 'openapi3-ts'
+import type { RegisteredExpressOpenAPIPlugin } from '../plugins'
+import { Stash } from '../stash'
 import { processExpressRouters } from './express'
 import { OpenAPISpecification } from './index'
-import { RegisteredExpressOpenAPIPlugin } from '../plugins/types'
-import { Stash } from '../stash'
 
 describe('processExpressRouters', () => {
   describe('detects paths with methods', () => {

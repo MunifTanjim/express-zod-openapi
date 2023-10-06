@@ -2,7 +2,7 @@ import express from 'express'
 import request from 'supertest'
 import { z } from 'zod'
 import { ExpressOpenAPI } from './index'
-import { getSpecificationPlugin } from './plugins'
+import { SpecificationPlugin } from './plugins/specification'
 
 const preprocessors = {
   numberString: (v: unknown) => {
@@ -28,7 +28,7 @@ describe('ExpressOpenAPI', () => {
     const expressOpenApi = new ExpressOpenAPI()
 
     const getSpecificationMiddleware = expressOpenApi.registerPlugin(
-      getSpecificationPlugin(),
+      SpecificationPlugin.create(),
     )
 
     const app = express()
@@ -63,7 +63,7 @@ describe('ExpressOpenAPI', () => {
     const expressOpenApi = new ExpressOpenAPI()
 
     const getSpecificationMiddleware = expressOpenApi.registerPlugin(
-      getSpecificationPlugin(),
+      SpecificationPlugin.create(),
     )
 
     const app = express()

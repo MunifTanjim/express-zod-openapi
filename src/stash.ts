@@ -1,6 +1,6 @@
-import { Handler } from 'express'
-import { Route } from './openapi/types'
-import { HttpMethod } from './types'
+import type { Handler } from 'express'
+import type { Route } from './openapi/express'
+import type { HttpMethod } from './types'
 
 export class Stash<Value> {
   private stashKey: string | symbol

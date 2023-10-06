@@ -7,3 +7,13 @@ export type HttpMethod =
   | 'post'
   | 'put'
   | 'trace'
+
+export type RequestSegment =
+  | 'body'
+  | 'cookies'
+  | 'headers'
+  | 'params'
+  | 'query'
+  | 'signedCookies'
+
+export type ResponseSegment = 'body' | 'headers'

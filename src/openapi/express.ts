@@ -1,8 +1,49 @@
-import { Application, Router } from 'express'
-import { RegisteredExpressOpenAPIPlugin } from '../plugins/types'
-import { HttpMethod } from '../types'
-import { OpenAPISpecification } from './index'
-import { Layer, Route, StackLayer, StackName } from './types'
+import type { Application, Router } from 'express'
+import type { RegisteredExpressOpenAPIPlugin } from '../plugins'
+import type { HttpMethod } from '../types'
+import type { OpenAPISpecification } from './specification'
+
+const enum StackName {
+  QUERY = 'query',
+  EXPRESS_INIT = 'expressInit',
+  BOUND_DISPATCH = 'bound dispatch',
+  ROUTER = 'router',
+  MOUNTED_APP = 'mounted_app',
+}
+
+interface Key {
+  name: string | number
+  prefix: string
+  suffix: string
+  pattern: string
+  modifier: string
+}
+
+interface Layer {
+  handle: Router | ((...params: any[]) => any)
+  params?: Record<string, any>
+  path?: string
+  keys: Key[]
+  regexp: RegExp & { fast_star?: boolean; fast_slash?: boolean }
+}
+
+interface StackLayer extends Layer {
+  name: StackName
+  route?: Route
+}
+
+interface RouteLayer extends Layer {
+  name: string
+  method: HttpMethod
+}
+
+export interface Route {
+  path: string | string[]
+  stack: RouteLayer[]
+  methods: {
+    [method in HttpMethod | '_all']?: boolean
+  }
+}
 
 const regexPattern = {
   param: /\(\?:\(\[\^\\\/]\+\?\)\)/,

@@ -1,4 +1,4 @@
-import { Handler } from 'express'
+import type { Handler } from 'express'
 import { Stash } from './stash'
 
 describe('Stash', () => {

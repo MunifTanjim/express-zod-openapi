@@ -52,3 +52,11 @@
 
 ## [0.0.8](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.7...0.0.8) (2023-10-06)
 
+## [0.0.9](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.8...0.0.9) (2023-10-06)
+
+
+### Features
+
+* export RequestValidationError and ResponseValidationError ([b8be573](https://github.com/MunifTanjim/express-zod-openapi/commit/b8be573ad7b745ef36f37a2723bd219cb18ba5d1))
+* export setupResponseValidation and validateRequest ([a6c285b](https://github.com/MunifTanjim/express-zod-openapi/commit/a6c285b2093e0479a3d8aca874a2d52c3e7ecbc9))
+

@@ -67,3 +67,10 @@
 
 * export RequestSegmentType and RequestSegmentType ([986dcb2](https://github.com/MunifTanjim/express-zod-openapi/commit/986dcb2f4168e458b282170749dcd302561b8991))
 
+## [0.0.11](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.10...0.0.11) (2023-10-16)
+
+
+### Bug Fixes
+
+* validate response before stringification ([20fb1e8](https://github.com/MunifTanjim/express-zod-openapi/commit/20fb1e8a3f158f1ce8cb47a5fcc33283548d8600))
+

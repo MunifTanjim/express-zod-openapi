@@ -35,19 +35,13 @@ export function setupResponseValidation(
   segmentOrder: ResponseSegment[],
   next: (err?: unknown) => void,
 ) {
-  const originalSend = res.send
+  const originalJson = res.json
 
-  res.send = function validateAndSendResponse(...args) {
-    res.send = originalSend
-
-    const body = args[0]
-
-    const isJsonContent = /application\/json/.test(
-      String(res.get('content-type')),
-    )
+  res.json = function validateAndSendJsonResponse(...args) {
+    res.json = originalJson
 
     const value: { [key in ResponseSegment]: unknown } = {
-      body: isJsonContent ? JSON.parse(body) : body,
+      body: args[0],
       headers: res.getHeaders(),
     }
 
@@ -83,8 +77,6 @@ export function setupResponseValidation(
       }
     }
 
-    return originalSend.apply(res, [
-      isJsonContent ? JSON.stringify(value.body) : value.body,
-    ])
+    return res.json(value.body)
   }
 }

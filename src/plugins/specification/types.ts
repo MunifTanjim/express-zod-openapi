@@ -24,9 +24,9 @@ export type ResponseSegmentType<
   VS extends SpecificationSchema,
   S extends ResponseSegment,
   D = unknown,
-> = VS['res'] extends undefined
+> = unknown extends VS['res']
   ? D
-  : NonNullable<VS['res']>[keyof NonNullable<VS['res']>][S] extends undefined
+  : unknown extends NonNullable<VS['res']>[keyof NonNullable<VS['res']>][S]
   ? D
   : UnionTypeOf<
       NonNullable<NonNullable<VS['res']>[keyof NonNullable<VS['res']>][S]>
@@ -35,10 +35,10 @@ export type ResponseSegmentType<
 export type RequestSegmentType<
   VS extends SpecificationSchema,
   S extends RequestSegment,
-  D = unknown,
-> = VS['req'] extends undefined
+  D = ExpressRequest[S],
+> = unknown extends VS['req']
   ? D
-  : NonNullable<VS['req']>[S] extends undefined
+  : unknown extends NonNullable<VS['req']>[S]
   ? D
   : TypeOf<NonNullable<NonNullable<VS['req']>[S]>>
 

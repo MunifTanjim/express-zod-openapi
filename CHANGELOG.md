@@ -74,3 +74,10 @@
 
 * validate response before stringification ([20fb1e8](https://github.com/MunifTanjim/express-zod-openapi/commit/20fb1e8a3f158f1ce8cb47a5fcc33283548d8600))
 
+## [0.0.12](https://github.com/MunifTanjim/express-zod-openapi/compare/0.0.11...0.0.12) (2023-10-19)
+
+
+### Bug Fixes
+
+* types RequestSegmentType and ResponseSegmentType ([3f674c5](https://github.com/MunifTanjim/express-zod-openapi/commit/3f674c59453c723628a91124a107ad73514e904f))
+
